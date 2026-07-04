@@ -1,7 +1,8 @@
-import { eq } from "drizzle-orm";
+import { eq, lte, and } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { InsertUser, users, entries, reminders, tags, settings, InsertEntry, InsertSettings } from "../drizzle/schema";
 import { ENV } from './_core/env';
+import { nanoid } from "nanoid";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -89,4 +90,122 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+/**
+ * Entry queries
+ */
+export async function getEntriesByUserId(userId: number, limit = 50, offset = 0) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  const result = await db
+    .select()
+    .from(entries)
+    .where(eq(entries.userId, userId))
+    .limit(limit)
+    .offset(offset)
+    .orderBy((e) => e.createdAt);
+  
+  return result;
+}
+
+export async function getEntryById(id: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+  
+  const result = await db
+    .select()
+    .from(entries)
+    .where(eq(entries.id, id))
+    .limit(1);
+  
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function createEntry(entry: InsertEntry) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  await db.insert(entries).values(entry);
+  return entry.id;
+}
+
+export async function updateEntry(id: string, updates: Partial<InsertEntry>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  await db.update(entries).set(updates).where(eq(entries.id, id));
+}
+
+/**
+ * Reminder queries
+ */
+export async function getRemindersDueNow() {
+  const db = await getDb();
+  if (!db) return [];
+  
+  const now = new Date();
+  const result = await db
+    .select()
+    .from(reminders)
+    .where((r) => and(lte(r.remindAt, now), eq(r.sent, false)));
+  
+  return result;
+}
+
+export async function markReminderAsSent(id: string) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  await db.update(reminders).set({ sent: true }).where(eq(reminders.id, id));
+}
+
+/**
+ * Tag queries
+ */
+export async function getTagsByUserId(userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  const result = await db
+    .select()
+    .from(tags)
+    .where(eq(tags.userId, userId))
+    .orderBy((t) => t.name);
+  
+  return result;
+}
+
+/**
+ * Settings queries
+ */
+export async function getSettingsByUserId(userId: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+  
+  const result = await db
+    .select()
+    .from(settings)
+    .where(eq(settings.userId, userId))
+    .limit(1);
+  
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function upsertSettings(userId: number, settingsData: Partial<InsertSettings>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const existing = await getSettingsByUserId(userId);
+  
+  if (existing) {
+    await db.update(settings).set(settingsData).where(eq(settings.userId, userId));
+  } else {
+    await db.insert(settings).values({
+      id: nanoid(),
+      userId,
+      ...settingsData,
+    });
+  }
+}
+
+

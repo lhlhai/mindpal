@@ -53,25 +53,30 @@
 - [ ] Add reminder history tracking
 
 ## Phase 6: Testing & Optimization
-- [ ] Write unit tests for API endpoints
-- [ ] Write tests for AI processing logic
-- [ ] Test reminder system functionality
+- [x] Write unit tests for API endpoints (ai-client, auth, reminders)
+- [x] Write tests for AI processing logic (fallback)
+- [x] Test reminder system functionality (basic structure)
 - [ ] Test mobile responsiveness
 - [ ] Optimize bundle size
 - [ ] Test authentication flow
 - [ ] Performance testing and optimization
 
 ## Phase 7: Deployment & Documentation
-- [ ] Set up environment variables (MINIMAX_API_KEY, SUPABASE_URL, etc.)
-- [ ] Create comprehensive README with setup instructions
+- [ ] Wire environment variables (MINIMAX_API_KEY, JWT_SECRET, OAUTH_SERVER_URL, etc.)
+- [x] Create comprehensive README with setup instructions
 - [ ] Test deployment to Vercel
-- [ ] Verify Supabase integration
+- [ ] Verify database integration
 - [ ] Final QA and bug fixes
-- [ ] Create checkpoint and prepare for delivery
+- [ ] Create final delivery checkpoint
 
 ## Additional Tasks
 - [ ] Configure Manus OAuth integration
-- [ ] Set up Supabase real-time subscriptions
 - [ ] Implement timezone handling
 - [ ] Add input validation and sanitization
 - [ ] Implement rate limiting for API endpoints
+- [ ] Add comprehensive reminder system tests (create, list, update, delete, pending, skip logic)
+- [ ] Add entries router API-level tests
+- [ ] Implement reminder management UI in EntryDetail
+- [ ] Implement cron job for sending reminders
+- [ ] Add Web Notifications API support
+- [ ] Implement logic to skip reminders for completed entries

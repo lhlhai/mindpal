@@ -37,16 +37,17 @@
 - [x] Create EntryDetail page (/entries/:id)
 - [x] Build entry editor form (all editable fields)
 - [ ] Create reminder management UI
-- [ ] Build Calendar View page (/calendar) with month/week view
+- [x] Build Calendar View page (/calendar) with month view (fixed layout)
 - [ ] Implement drag-and-drop for changing entry dates
 - [ ] Create TagManager page for managing tags
-- [ ] Build Settings page (/settings) with user preferences
-- [ ] Implement data export functionality (JSON/Markdown)
+- [x] Build Settings page (/settings) with user preferences
+- [x] Implement data export functionality (JSON/Markdown with localStorage)
 
 ## Phase 5: Reminders & Cron Jobs
+- [x] Create reminders router procedures (create, list, update, delete, getPending)
+- [ ] Implement reminder management UI in EntryDetail
 - [ ] Configure Vercel Cron Jobs to call /api/send-reminders every 5 minutes
 - [ ] Implement in-app notification system
-- [ ] Create toast notification component
 - [ ] Add Web Notifications API support
 - [ ] Implement logic to skip reminders for completed entries
 - [ ] Add reminder history tracking

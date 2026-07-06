@@ -79,6 +79,12 @@ export default function Dashboard() {
                 Calendar
               </Button>
             </Link>
+            <Link href="/settings">
+              <Button variant="outline" size="sm" className="gap-2">
+                ⚙️
+                Settings
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

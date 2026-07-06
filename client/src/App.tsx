@@ -8,6 +8,8 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Entries from "./pages/Entries";
 import EntryDetail from "./pages/EntryDetail";
+import Calendar from "./pages/Calendar";
+import Settings from "./pages/Settings";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -17,6 +19,8 @@ function Router() {
       <Route path={"/dashboard"} component={Dashboard} />
       <Route path={"/entries"} component={Entries} />
       <Route path={"/entries/:id"} component={EntryDetail} />
+      <Route path={"/calendar"} component={Calendar} />
+      <Route path={"/settings"} component={Settings} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

@@ -3,7 +3,6 @@
   "outputDirectory": "dist",
   "installCommand": "pnpm install --frozen-lockfile",
   "framework": null,
-  "nodeVersion": "22.x",
   "env": {
     "NODE_ENV": "production"
   },

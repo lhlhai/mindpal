@@ -27,9 +27,12 @@ if (process.env.NODE_ENV === "development") {
   setupVite(app, server).then(() => {
     server.listen(3000, () => console.log("Dev server running on :3000"));
   });
-} else {
+} else if (!process.env.VERCEL) {
+  // Only run standalone server in non-Vercel production environments
   serveStatic(app);
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => console.log(`Production server running on :${port}`));
 }
 
-// Export cho Vercel serverless function
+// Export for Vercel serverless function
 export default app;

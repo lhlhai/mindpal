@@ -1,21 +1,5 @@
 {
   "buildCommand": "pnpm build",
-  "outputDirectory": "dist",
   "installCommand": "pnpm install --frozen-lockfile",
-  "framework": null,
-  "env": {
-    "NODE_ENV": "production"
-  },
-  "functions": {
-    "dist/index.js": {
-      "memory": 512,
-      "maxDuration": 60
-    }
-  },
- "crons": [
-  {
-    "path": "/api/reminders/send",
-    "schedule": "0 8 * * *"
-  }
-]
+  "framework": null
 }

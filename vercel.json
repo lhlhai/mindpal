@@ -12,10 +12,10 @@
       "maxDuration": 60
     }
   },
-  "crons": [
-    {
-      "path": "/api/reminders/send",
-      "schedule": "*/5 * * * *"
-    }
-  ]
+ "crons": [
+  {
+    "path": "/api/reminders/send",
+    "schedule": "0 8 * * *"
+  }
+]
 }

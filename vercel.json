@@ -3,11 +3,6 @@
   "installCommand": "pnpm install --frozen-lockfile",
   "framework": null,
   "outputDirectory": "dist/public",
-  "functions": {
-    "api/*.ts": {
-      "runtime": "@vercel/node@4"
-    }
-  },
   "routes": [
     {
       "src": "/api/(.*)",
